@@ -1,5 +1,3 @@
-# LLVM MSVC Compatibility
-
 # 1.clang/lib/sema/SemaExpr.cpp 
 
 Problem:
