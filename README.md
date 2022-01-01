@@ -15,6 +15,18 @@ Problem:
 ```C++
 printf(__FUNCTION__ "Hello, world!\n");
 ```
+
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0002-MSVC-Compatibility.patch)
 
   
+  
+# 3.lld/COFF/Writer.cpp
+
+Problem:
+```C++
+Fix the characteristics of some sections like ".voltbl". Or the program will be crash sometimes.
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0003-MSVC-Compatibility.patch)
+
+
