@@ -23,6 +23,7 @@ index cfee7a3c2513..69983974aa1f 100644
 +  //[MSVC Compatibility]
 +#ifdef _WIN32
 +  Ident__FUNCTION__ = RegisterBuiltinMacro(*this, "__FUNCTION__");
++  Ident__LINE__ = RegisterBuiltinMacro(*this, "__LINE__");
 +#else
 +  Ident__FUNCTION__ = Ident__LINE__ = RegisterBuiltinMacro(*this, "__LINE__");
 +#endif
