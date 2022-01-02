@@ -1,0 +1,13 @@
+diff --git a/clang/lib/AST/ASTContext.cpp b/clang/lib/AST/ASTContext.cpp
+index ac6f98e91f75..44914bf973b3 100644
+--- a/clang/lib/AST/ASTContext.cpp
++++ b/clang/lib/AST/ASTContext.cpp
+@@ -10430,6 +10430,8 @@ QualType ASTContext::getCorrespondingSignedType(QualType T) const {
+     return SatFractTy;
+   case BuiltinType::SatULongFract:
+     return SatLongFractTy;
++  case BuiltinType::Bool: //[MSVC Compatibility]
++    return BoolTy;
+   default:
+     llvm_unreachable("Unexpected unsigned integer or fixed point type");
+   }
