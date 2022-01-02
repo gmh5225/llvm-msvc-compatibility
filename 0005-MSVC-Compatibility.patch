@@ -1,0 +1,13 @@
+diff --git a/lld/COFF/Driver.cpp b/lld/COFF/Driver.cpp
+index 07b60673577e..990cb6c30017 100644
+--- a/lld/COFF/Driver.cpp
++++ b/lld/COFF/Driver.cpp
+@@ -259,7 +259,7 @@ void LinkerDriver::enqueuePath(StringRef path, bool wholeArchive, bool lazy) {
+       // directory.
+       std::string nearest;
+       if (optTable.findNearest(pathStr, nearest) > 1)
+-        error(msg);
++        warn(msg); //[MSVC Compatibility]
+       else
+         error(msg + "; did you mean '" + nearest + "'");
+     } else
