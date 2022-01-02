@@ -1,0 +1,13 @@
+diff --git "a/lld/COFF/SymbolTable.cpp" "b/lld/COFF/SymbolTable.cpp"
+index 679c91ad06e6..afad38129e31 100644
+--- "a/lld/COFF/SymbolTable.cpp"
++++ "b/lld/COFF/SymbolTable.cpp"
+@@ -657,7 +657,7 @@ void SymbolTable::reportDuplicate(Symbol *existing, InputFile *newFile,
+   if (config->forceMultiple)
+     warn(os.str());
+   else
+-    error(os.str());
++    warn(os.str()); //[MSVC Compatibility]
+ }
+ 
+ Symbol *SymbolTable::addAbsolute(StringRef n, COFFSymbolRef sym) {
