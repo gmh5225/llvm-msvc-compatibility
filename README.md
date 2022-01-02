@@ -46,3 +46,16 @@ void OutputTrace(int place_holder, ...)
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0004-MSVC-Compatibility.patch)
 
 
+
+# 5.lld/COFF/Driver.cpp
+
+Problem:
+```C++
+1>lld-link : error : could not open '/RELEASE': no such file or directory
+1>lld-link : error : could not open '/kernel': no such file or directory
+1>lld-link : error : could not open '/pdbcompress': no such file or directory
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0005-MSVC-Compatibility.patch)
+
+
