@@ -59,3 +59,16 @@ Problem:
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0005-MSVC-Compatibility.patch)
 
 
+
+# 6.lld/COFF/SymbolTable.cpp
+
+Problem:
+```C++
+1>lld-link : warning : duplicate symbol: g_GlobalNotifyRecord
+1>>>> defined at x64\Debug\Broadcast.obj
+1>>>> defined at x64\Debug\Vpid.obj
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0006-MSVC-Compatibility.patch)
+
+
