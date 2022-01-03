@@ -72,3 +72,14 @@ Problem:
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0006-MSVC-Compatibility.patch)
 
 
+
+# 7.clang/include/clang/Driver/Options.td
+
+Problem:
+```C++
+Null ptr is invalid.
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0007-MSVC-Compatibility.patch)
+
+
