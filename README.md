@@ -64,7 +64,7 @@ Problem:
 
 Problem:
 ```C++
-1>lld-link : warning : duplicate symbol: g_GlobalNotifyRecord
+1>lld-link : error : duplicate symbol: g_GlobalNotifyRecord
 1>>>> defined at x64\Debug\Broadcast.obj
 1>>>> defined at x64\Debug\Vpid.obj
 ```
