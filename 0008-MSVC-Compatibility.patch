@@ -1,0 +1,16 @@
+diff --git a/lld/COFF/Writer.cpp b/lld/COFF/Writer.cpp
+index 3ade6ecd65b3..78237d8f45d7 100644
+--- a/lld/COFF/Writer.cpp
++++ b/lld/COFF/Writer.cpp
+@@ -1425,8 +1425,9 @@ template <typename PEHeaderTy> void Writer::writeHeader() {
+     pe->DLLCharacteristics |= IMAGE_DLL_CHARACTERISTICS_FORCE_INTEGRITY;
+   if (setNoSEHCharacteristic || config->noSEH)
+     pe->DLLCharacteristics |= IMAGE_DLL_CHARACTERISTICS_NO_SEH;
+-  if (config->terminalServerAware)
+-    pe->DLLCharacteristics |= IMAGE_DLL_CHARACTERISTICS_TERMINAL_SERVER_AWARE;
++  // [MSVC Compatibility] unused DLLCharacteristics
++  /*if (config->terminalServerAware)
++    pe->DLLCharacteristics |= IMAGE_DLL_CHARACTERISTICS_TERMINAL_SERVER_AWARE;*/
+   pe->NumberOfRvaAndSize = numberOfDataDirectory;
+   if (textSec->getVirtualSize()) {
+     pe->BaseOfCode = textSec->getRVA();
