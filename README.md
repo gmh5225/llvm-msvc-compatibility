@@ -104,7 +104,7 @@ Problem:
 									*addr++ = 0;\
 								}\
 ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-will be optimize to 'memset'.
+will be optimized to 'memset'.
 ```
 
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0009-MSVC-Compatibility.patch)
