@@ -94,3 +94,19 @@ Unused IMAGE_DLL_CHARACTERISTICS_TERMINAL_SERVER_AWARE
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0008-MSVC-Compatibility.patch)
 
 
+
+# 9.llvm/lib/Transforms/Scalar/LoopIdiomRecognize.cpp
+
+Problem:
+```C++
+#define ZERO_MEMORY(addr,size) while (size-->0)\
+								{\
+									*addr++ = 0;\
+								}\
+->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+will be optimize to 'memset'.
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0009-MSVC-Compatibility.patch)
+
+
