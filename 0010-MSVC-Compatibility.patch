@@ -1,0 +1,80 @@
+diff --git a/clang/lib/Parse/ParseDecl.cpp b/clang/lib/Parse/ParseDecl.cpp
+index cff8c76183f6..62b19871f93d 100644
+--- a/clang/lib/Parse/ParseDecl.cpp
++++ b/clang/lib/Parse/ParseDecl.cpp
+@@ -775,7 +775,9 @@ void Parser::ParseMicrosoftDeclSpecs(ParsedAttributes &Attrs,
+ void Parser::ParseMicrosoftTypeAttributes(ParsedAttributes &attrs) {
+   // Treat these like attributes
+   while (true) {
+-    switch (Tok.getKind()) {
++    // [MSVC Compatibility]
++    auto Kind = Tok.getKind();
++    switch (Kind) {
+     case tok::kw___fastcall:
+     case tok::kw___stdcall:
+     case tok::kw___thiscall:
+@@ -791,6 +793,14 @@ void Parser::ParseMicrosoftTypeAttributes(ParsedAttributes &attrs) {
+       SourceLocation AttrNameLoc = ConsumeToken();
+       attrs.addNew(AttrName, AttrNameLoc, nullptr, AttrNameLoc, nullptr, 0,
+                    ParsedAttr::AS_Keyword);
++      // [MSVC Compatibility]
++      if (Kind == tok::kw___stdcall || Kind == tok::kw___cdecl ||
++          Kind == tok::kw___fastcall || Kind == tok::kw___thiscall ||
++          Kind == tok::kw___regcall || Kind == tok::kw___vectorcall) {
++        if (Tok.is(tok::r_paren) && NextToken().is(tok::l_paren)) {
++          ConsumeParen();
++        }
++      }
+       break;
+     }
+     default:
+@@ -3360,7 +3370,19 @@ void Parser::ParseDeclarationSpecifiers(DeclSpec &DS,
+ 
+       DS.SetRangeEnd(Tok.getAnnotationEndLoc());
+       ConsumeAnnotationToken(); // The typename
+-
++      //[MSVC Compatibility]
++      if (Tok.is(tok::l_paren) &&
++          NextToken().isOneOf(tok::kw___stdcall, tok::kw___cdecl,
++                              tok::kw___fastcall, tok::kw___thiscall,
++                              tok::kw___regcall, tok::kw___vectorcall)) {
++        const Token &NextNextToken = PP.LookAhead(1);
++        if (NextNextToken.is(tok::r_paren)) {
++          const Token &NextToken2 = PP.LookAhead(2);
++          if (NextToken2.is(tok::l_paren)) {
++            ConsumeParen();
++          }
++        }
++      }
+       continue;
+     }
+ 
+diff --git a/clang/lib/Parse/ParseTentative.cpp b/clang/lib/Parse/ParseTentative.cpp
+index 512993a5278e..3ba75bf1277b 100644
+--- a/clang/lib/Parse/ParseTentative.cpp
++++ b/clang/lib/Parse/ParseTentative.cpp
+@@ -1642,8 +1642,23 @@ Parser::isCXXDeclarationSpecifier(Parser::TPResult BracedCastResult,
+   case tok::annot_decltype:
+ #define GENERIC_IMAGE_TYPE(ImgType, Id) case tok::kw_##ImgType##_t:
+ #include "clang/Basic/OpenCLImageTypes.def"
+-    if (NextToken().is(tok::l_paren))
++    if (NextToken().is(tok::l_paren)) {
++      //[MSVC Compatibility]
++      if (Tok.is(tok::annot_typename)) {
++        const Token &NextNextToken = PP.LookAhead(1);
++        if (NextNextToken.isOneOf(tok::kw___stdcall, tok::kw___cdecl,
++                                  tok::kw___fastcall, tok::kw___thiscall,
++                                  tok::kw___regcall, tok::kw___vectorcall)) {
++          const Token &NextToken2 = PP.LookAhead(2);
++          const Token &NextToken3 = PP.LookAhead(3);
++          if (NextToken2.is(tok::r_paren) && NextToken3.is(tok::l_paren)) {
++            return TPResult::True;
++          }
++        }
++      }
+       return TPResult::Ambiguous;
++    }
++      
+ 
+     // This is a function-style cast in all cases we disambiguate other than
+     // one:
