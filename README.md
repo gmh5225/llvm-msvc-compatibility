@@ -129,3 +129,17 @@ error : function cannot return function type 'R (Args...)'
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0010-MSVC-Compatibility.patch)
 
 
+
+# 11.clang/tools/driver/driver.cpp
+
+Problem:
+```C++
+ __m128i x1, x2;
+ __m128i x3 = _mm_shuffle_epi8(x1, x2);
+ ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ _mm_shuffle_epi8 needs '-mssse3'
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0011-MSVC-Compatibility.patch)
+
+
