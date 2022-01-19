@@ -110,3 +110,22 @@ will be optimized to 'memset'.
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0009-MSVC-Compatibility.patch)
 
 
+
+# 10.clang/lib/Parse/ParseDecl.cpp clang/lib/Parse/ParseDecl.cpp
+
+Problem:
+```C++
+template <typename R, typename... Args>
+struct MyTestTemplate;
+
+template <typename R, typename... Args>
+struct MyTestTemplate<R(__stdcall)(Args...)>
+{
+};
+->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+error : function cannot return function type 'R (Args...)'
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0010-MSVC-Compatibility.patch)
+
+
