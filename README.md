@@ -143,3 +143,14 @@ Problem:
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0011-MSVC-Compatibility.patch)
 
 
+
+# 12.lld/COFF/Driver.cpp
+
+Problem:
+```C++
+#pragma comment(linker, "/ALIGN:0x10000")
+->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Error:/ALIGN: is not allowed in .drectve
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0012-MSVC-Compatibility.patch)
