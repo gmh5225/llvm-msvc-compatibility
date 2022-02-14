@@ -1,0 +1,15 @@
+diff --git a/lld/COFF/Driver.cpp b/lld/COFF/Driver.cpp
+index 1546291e16c6..9c2430c0375f 100644
+--- a/lld/COFF/Driver.cpp
++++ b/lld/COFF/Driver.cpp
+@@ -409,6 +409,10 @@ void LinkerDriver::parseDirectives(InputFile *file) {
+     case OPT_guardsym:
+     case OPT_throwingnew:
+       break;
++    case OPT_align:
++      // [MSVC Compatibility] Handle #pragma comment(linker, "/ALIGN:0x10000")
++      parseNumbers(arg->getValue(), &config->align);
++      break;
+     default:
+       error(arg->getSpelling() + " is not allowed in .drectve");
+     }
