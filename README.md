@@ -154,3 +154,14 @@ Error:/ALIGN: is not allowed in .drectve
 ```
 
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0012-MSVC-Compatibility.patch)
+
+
+
+# 13.clang\include\clang\Basic\DiagnosticSemaKinds.td
+
+Problem:
+```C++
+error : invalid application of 'sizeof' to an incomplete type 'xxx'
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0013-MSVC-Compatibility.patch)
