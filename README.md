@@ -165,3 +165,15 @@ error : invalid application of 'sizeof' to an incomplete type 'xxx'
 ```
 
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0013-MSVC-Compatibility.patch)
+
+
+
+# 14.clang\include\clang\Basic\DiagnosticSemaKinds.td
+
+Problem:
+```C++
+error : static_cast from a to b, which are not related by inheritance, is not allowed
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0014-MSVC-Compatibility.patch)
+
