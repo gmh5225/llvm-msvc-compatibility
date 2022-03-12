@@ -177,3 +177,23 @@ error : static_cast from a to b, which are not related by inheritance, is not al
 
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0014-MSVC-Compatibility.patch)
 
+
+
+# 15.clang/lib/Lex/TokenLexer.cpp
+
+Problem:
+```C++
+#define MY_TEST 6
+#define TEST_222(major) (0x##major)
+int
+main()
+{
+    int test2 = TEST_222(MY_TEST);
+    return 0;
+}
+->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+error : invalid suffix 'xMY_TEST' on integer constant
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0015-MSVC-Compatibility.patch)
+
