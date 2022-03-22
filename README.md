@@ -197,3 +197,15 @@ error : invalid suffix 'xMY_TEST' on integer constant
 
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0015-MSVC-Compatibility.patch)
 
+
+
+# 16.clang/lib/Basic/SourceManager.cpp
+
+Problem:
+```C++
+1>util\log.c(492,10): fatal error : UTF-16 (LE) byte order mark detected in 'util/ioctl.inc', but encoding is not supported
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0016-MSVC-Compatibility.patch)
+
+
