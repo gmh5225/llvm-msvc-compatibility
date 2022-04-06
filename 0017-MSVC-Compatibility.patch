@@ -11,13 +11,6 @@ index 8fcdbf4dbcb7..fa0a781337e7 100644
 +    if ((LHSTok.is(tok::period) || LHSTok.is(tok::arrow)) &&
 +        RHS.isAnyIdentifier()) {
 +      // Handle '.##identifier' or '->##identifier'
-+      PP.IncrementPasteCounter(true);
-+      Result.startToken();
-+      Result.setKind(tok::raw_identifier);
-+      Result.setRawIdentifierData(ResultTokStrPtr);
-+      Result.setLocation(ResultTokLoc);
-+      Result.setLength(LHSLen + RHSLen);
-+      PP.LookUpIdentifierInfo(Result);
 +      // Returns true the caller should immediately return the token.
 +      return true;
 +    }
