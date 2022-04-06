@@ -209,3 +209,23 @@ Problem:
 [Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0016-MSVC-Compatibility.patch)
 
 
+
+# 17.clang/lib/Lex/TokenLexer.cpp
+
+Problem:
+```C++
+#define DBGKP_FIELD_FROM_IMAGE_OPTIONAL_HEADER(hdrs, field) ((hdrs)->OptionalHeader.##field)
+CreateThreadArgs->StartAddress = UlongToPtr(
+                            DBGKP_FIELD_FROM_IMAGE_OPTIONAL_HEADER((PIMAGE_NT_HEADERS32)NtHeaders, ImageBase) +
+                            DBGKP_FIELD_FROM_IMAGE_OPTIONAL_HEADER(
+                                (PIMAGE_NT_HEADERS32)NtHeaders, AddressOfEntryPoint));
+->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>				
+error : pasting formed '.AddressOfEntryPoint', an invalid preprocessing token [-Winvalid-token-paste]
+```
+
+[Patch](https://github.com/gmh5225/LLVM_MSVC_Compatibility/blob/main/0017-MSVC-Compatibility.patch)
+
+
+
+
+
