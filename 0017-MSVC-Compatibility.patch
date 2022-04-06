@@ -1,0 +1,25 @@
+diff --git a/clang/lib/Lex/TokenLexer.cpp b/clang/lib/Lex/TokenLexer.cpp
+index 8fcdbf4dbcb7..48009c7c9a31 100644
+--- a/clang/lib/Lex/TokenLexer.cpp
++++ b/clang/lib/Lex/TokenLexer.cpp
+@@ -815,7 +815,19 @@ bool TokenLexer::pasteTokens(Token &LHSTok, ArrayRef<Token> TokenStream,
+ 
+     // Lex the resultant pasted token into Result.
+     Token Result;
+-
++    // [MSVC Compatibility]
++    if (LHSTok.is(tok::period) && RHS.isAnyIdentifier()) {
++      // Handle '.##identifier' or '->##identifier'
++      PP.IncrementPasteCounter(true);
++      Result.startToken();
++      Result.setKind(tok::raw_identifier);
++      Result.setRawIdentifierData(ResultTokStrPtr);
++      Result.setLocation(ResultTokLoc);
++      Result.setLength(LHSLen + RHSLen);
++      PP.LookUpIdentifierInfo(Result);
++      // Returns true the caller should immediately return the token.
++      return true;
++    }
+     if (LHSTok.isAnyIdentifier() && RHS.isAnyIdentifier()) {
+       // Common paste case: identifier+identifier = identifier.  Avoid creating
+       // a lexer and other overhead.
