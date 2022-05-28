@@ -1,3 +1,7 @@
+
+# LLVM_MSVC_Compatibility
+This project was aimed to be used for llvm-msvc [[link]](https://github.com/NewWorldComingSoon/llvm-msvc-build)
+
 # 1.clang/lib/sema/SemaExpr.cpp 
 
 Problem:
